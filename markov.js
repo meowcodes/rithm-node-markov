@@ -52,7 +52,8 @@ class MarkovMachine {
 
   makeText(numWords = 100) {
     // pick random word from words list
-    let randomWord = this.words[Math.floor(Math.random() * this.words.length)];
+    const keysArr = Object.keys(this.chain)
+    let randomWord = keysArr[Math.floor(Math.random() * keysArr.length)];
 
     // assign that word to a string called newStory. Capitalize 1st letter of first word.
     let newStory = randomWord[0].toUpperCase() + randomWord.slice(1);
@@ -62,7 +63,8 @@ class MarkovMachine {
     let currWord = randomWord;
 
     while(counter<numWords) {
-      let nextWordsArr = this.chain[currWord];
+      let nextWordsArr = this.chain[currWord.toLowerCase()];
+      console.log(`current word: ${currWord}, next word array: ${nextWordsArr}`)
       let nextWord = nextWordsArr[Math.floor(Math.random() * nextWordsArr.length)];
       if (!nextWord) {
         break;
