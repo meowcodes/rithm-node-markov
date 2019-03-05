@@ -60,7 +60,7 @@ class MarkovMachine {
     // assign that word to a string called newStory. Capitalize 1st letter of first word.
     let newStory = randomWord[0].toUpperCase() + randomWord.slice(1);
 
-    let counter = 0;
+    let counter = 1;
 
     let currWord = randomWord;
 
@@ -72,6 +72,9 @@ class MarkovMachine {
         break;
       }
       newStory += ` ${nextWord}`;
+      if (!this.chain[nextWord]) {
+        break;
+      }
       currWord = nextWord;
       counter++;
     }

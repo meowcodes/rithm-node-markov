@@ -16,7 +16,7 @@ async function makeText(argv){
     let instance = new Markov(text)
 
     // call .makeText()
-    console.log(instance.makeText(30))
+    console.log(instance.makeText())
 }
 
 async function readInput(type, path){
