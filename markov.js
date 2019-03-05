@@ -28,10 +28,12 @@ class MarkovMachine {
         nextWord = this.words[i+1].toLowerCase();
       }
       
+      // console.log("WORDS!",thisWord, nextWord)
+
       // drop '.' and change next word to null if end of sentence
       if(thisWord.endsWith('.') || thisWord.endsWith(',')){
         thisWord = thisWord.slice(0,-1);
-      } else {
+      } else if(nextWord) {
         if(nextWord.endsWith('.') || nextWord.endsWith(',')){
           nextWord = nextWord.slice(0,-1);
         }
@@ -64,7 +66,7 @@ class MarkovMachine {
 
     while(counter<numWords) {
       let nextWordsArr = this.chain[currWord.toLowerCase()];
-      console.log(`current word: ${currWord}, next word array: ${nextWordsArr}`)
+      // console.log(`current word: ${currWord}, next word array: ${nextWordsArr}`)
       let nextWord = nextWordsArr[Math.floor(Math.random() * nextWordsArr.length)];
       if (!nextWord) {
         break;
@@ -82,6 +84,5 @@ class MarkovMachine {
     // Make sure to add period before returning story
   }
 }
-
 
 module.exports = MarkovMachine

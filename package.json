@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/meowcodes/rithm-node-markov/issues"
   },
-  "homepage": "https://github.com/meowcodes/rithm-node-markov#readme"
+  "homepage": "https://github.com/meowcodes/rithm-node-markov#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
 }
