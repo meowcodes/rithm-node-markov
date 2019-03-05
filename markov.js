@@ -17,42 +17,67 @@ class MarkovMachine {
    *  {"the": ["cat", "hat"], "cat": ["in"], "in": ["the"], "hat": [null]} */
 
   makeChains() {
-    let chain = {}
+    let chain = {};
 
     for (let i = 0; i < this.words.length; i++){
 
-      let thisWord = this.words[i].toLowerCase()
-      let nextWord = null
+      let thisWord = this.words[i].toLowerCase();
+      let nextWord = null;
 
       if(this.words[i+1]){
-        nextWord = this.words[i+1].toLowerCase()
+        nextWord = this.words[i+1].toLowerCase();
       }
       
       // drop '.' and change next word to null if end of sentence
       if(thisWord.endsWith('.') || thisWord.endsWith(',')){
-        thisWord = thisWord.slice(0,-1)
-      }else {
+        thisWord = thisWord.slice(0,-1);
+      } else {
         if(nextWord.endsWith('.') || nextWord.endsWith(',')){
-          nextWord = nextWord.slice(0,-1)
+          nextWord = nextWord.slice(0,-1);
         }
       }
 
       // add to chain obj
       if(!chain[thisWord]){
-        chain[thisWord] = [nextWord]
+        chain[thisWord] = [nextWord];
       }else {
-        chain[thisWord].push(nextWord)
+        chain[thisWord].push(nextWord);
       }
     }
 
     return chain;
   }
 
-
   /** return random text from chains */
 
   makeText(numWords = 100) {
-    // TODO
+    // pick random word from words list
+    let randomWord = this.words[Math.floor(Math.random() * this.words.length)];
+
+    // assign that word to a string called newStory. Capitalize 1st letter of first word.
+    let newStory = randomWord[0].toUpperCase() + randomWord.slice(1);
+
+    let counter = 0;
+
+    let currWord = randomWord;
+
+    while(counter<numWords) {
+      let nextWordsArr = this.chain[currWord];
+      let nextWord = nextWordsArr[Math.floor(Math.random() * nextWordsArr.length)];
+      if (!nextWord) {
+        break;
+      }
+      newStory += ` ${nextWord}`;
+      currWord = nextWord;
+      counter++;
+    }
+
+    newStory += '.';
+
+    return newStory
+
+    // while loop through the chains to generate a story. Stop at null OR when max num words has been reached.
+    // Make sure to add period before returning story
   }
 }
 
