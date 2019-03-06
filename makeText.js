@@ -20,12 +20,10 @@ async function makeText(argv){
 }
 
 async function readInput(type, path){
-
     if(type==="file"){
         return  getFileText(path) 
     }else if(type==="url"){
         let text = await getWebText(path)
-        // console.log(text)
         return text.data
     }
 }
@@ -46,9 +44,12 @@ async function getWebText(path){
     }
     catch(error){
         console.log(error);
-        process.exit(1);
+        return null;
+        // process.exit(1);
     }
 }
 
 
-makeText(process.argv)
+// makeText(process.argv)
+
+module.exports = {makeText, readInput, getFileText, getWebText}
